@@ -1,0 +1,176 @@
+1.Implement the bubble sort algo using classes and methods
+
+class BubbleSort:
+    def __init__(self, data):
+        self.data = data
+
+    def sort(self):
+        n = len(self.data)
+        for i in range(n):
+            for j in range(0, n-i-1):
+                if self.data[j] > self.data[j+1]:
+                    self.data[j], self.data[j+1] = self.data[j+1], self.data[j]
+
+    def get_sorted_data(self):
+        return self.data
+
+
+# Example Usage
+arr = [64, 34, 25, 12, 22, 11, 90]
+bubble_sort = BubbleSort(arr)
+bubble_sort.sort()
+print("Sorted array:", bubble_sort.get_sorted_data())
+
+
+2.Implement the insertion sort using Python
+
+def insertion_sort(arr):
+    for i in range(1, len(arr)):
+        key = arr[i]
+        j = i - 1
+        while j >= 0 and key < arr[j]:
+            arr[j + 1] = arr[j]
+            j -= 1
+        arr[j + 1] = key
+
+
+# Example Usage
+arr = [12, 11, 13, 5, 6]
+insertion_sort(arr)
+print("Sorted array:", arr)
+
+3.Implement the selection sort using Python
+
+def selection_sort(arr):
+    for i in range(len(arr)):
+        min_idx = i
+        for j in range(i + 1, len(arr)):
+            if arr[j] < arr[min_idx]:
+                min_idx = j
+        arr[i], arr[min_idx] = arr[min_idx], arr[i]
+    return arr
+
+# Example usage
+arr = [64, 34, 25, 12, 22, 11, 90]
+sorted_array = selection_sort(arr)
+print(sorted_array)
+
+4.Implement the merge sort or quick sort
+
+def merge_sort(arr):
+    if len(arr) > 1:
+        mid = len(arr) // 2
+        left_half = arr[:mid]
+        right_half = arr[mid:]
+
+        merge_sort(left_half)
+        merge_sort(right_half)
+
+        i = j = k = 0
+        while i < len(left_half) and j < len(right_half):
+            if left_half[i] < right_half[j]:
+                arr[k] = left_half[i]
+                i += 1
+            else:
+                arr[k] = right_half[j]
+                j += 1
+            k += 1
+
+        while i < len(left_half):
+            arr[k] = left_half[i]
+            i += 1
+            k += 1
+
+        while j < len(right_half):
+            arr[k] = right_half[j]
+            j += 1
+            k += 1
+    return arr
+
+# Example usage
+arr = [64, 34, 25, 12, 22, 11, 90]
+sorted_array = merge_sort(arr)
+print(sorted_array)
+
+
+5.Implement the linear search algorithm using python
+
+def linear_search(arr, target):
+    for i in range(len(arr)):
+        if arr[i] == target:
+            return i  # return the index of the target element
+    return -1  # return -1 if element is not found
+
+# Example usage
+arr = [64, 34, 25, 12, 22, 11, 90]
+target = 25
+index = linear_search(arr, target)
+print(f"Element found at index: {index}" if index != -1 else "Element not found")
+
+
+6.Implement the binary search using Python (Element should be sorted)
+
+def binary_search(arr, target):
+    low = 0
+    high = len(arr) - 1
+    while low <= high:
+        mid = (low + high) // 2
+        if arr[mid] == target:
+            return mid  # Element is found at index mid
+        elif arr[mid] < target:
+            low = mid + 1
+        else:
+            high = mid - 1
+    return -1  # Element is not found
+
+# Example usage
+arr = [11, 12, 22, 25, 34, 64, 90]
+target = 25
+index = binary_search(arr, target)
+print(f"Element found at index: {index}" if index != -1 else "Element not found")
+
+7.Implement the binary tree using python
+
+class Node:
+    def __init__(self, key):
+        self.left = None
+        self.right = None
+        self.value = key
+
+class BinaryTree:
+    def __init__(self, root):
+        self.root = Node(root)
+
+    def insert(self, key):
+        self._insert(self.root, key)
+
+    def _insert(self, root, key):
+        if key < root.value:
+            if root.left is None:
+                root.left = Node(key)
+            else:
+                self._insert(root.left, key)
+        else:
+            if root.right is None:
+                root.right = Node(key)
+            else:
+                self._insert(root.right, key)
+
+    def inorder(self, root):
+        if root:
+            self.inorder(root.left)
+            print(root.value, end=" ")
+            self.inorder(root.right)
+
+# Example usage
+tree = BinaryTree(50)
+tree.insert(30)
+tree.insert(20)
+tree.insert(40)
+tree.insert(70)
+tree.insert(60)
+tree.insert(80)
+
+# In-order traversal
+print("In-order traversal:")
+tree.inorder(tree.root)
